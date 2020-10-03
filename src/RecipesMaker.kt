@@ -1,7 +1,3 @@
-import java.lang.NullPointerException
-
-val numberSelected={ readLine()?.toInt()}
-
 fun main(args: Array<String>){
 
     do {
@@ -13,15 +9,15 @@ fun main(args: Array<String>){
     3. Salir        
     """.trimIndent()
         )
-        val selected = numberSelected()
+        val selected = readLine()
 
         when (selected) {
-            1 -> makeRecipe()
-            2 ->  println("Seleccionaste ver mis Recetas")
-            3 -> println("Gracias por visitarnos")
-            else -> println("Escoge una de las opciones")
+            "1" -> makeRecipe()
+            "2" ->  println("Seleccionaste ver mis Recetas")
+            "3" -> println("Gracias por visitarnos")
+            else -> println("Opcion no valida, vuelve a intentarlo")
         }
-    }while (selected!=3)
+    }while (!selected.equals("3"))
 }
 
 fun makeRecipe(){
@@ -37,8 +33,21 @@ fun makeRecipe(){
     6. Cereal
     7. Huevos
     8. Aceites""".trimIndent())
-        val selected = numberSelected()
-    }while (!(selected in (1..8)))
+
+        val selected = readLine()
+
+        when (selected) {
+            "1" -> return
+            "2" -> return
+            "3" -> return
+            "4" -> return
+            "5" -> return
+            "6" -> return
+            "7" -> return
+            "8" -> return
+            else -> println("Opcion no valida, vuelve a intentarlo")
+        }
+    }while (true)
 }
 
 fun viewRecipe(){println("""
