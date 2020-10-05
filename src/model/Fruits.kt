@@ -7,7 +7,7 @@ class Fruits(): Food(){
                 "Selecciona el ingrediente que necesitas:")
     }
 
-    override fun ingredients(): String{
+    override fun getIngredient(): String{
         do{
             println("""
     0. VOLVER

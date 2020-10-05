@@ -6,7 +6,7 @@ class Grain() : Food(){
         println("Cereales")
     }
 
-    override fun ingredients(): String{
+    override fun getIngredient(): String{
         do {
             println("""
 Selecciona el Ingrediente que necesitas:

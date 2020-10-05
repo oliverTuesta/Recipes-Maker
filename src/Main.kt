@@ -1,11 +1,15 @@
 import model.Fruits
 import model.Grain
+import model.Recipe
 
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
+
+    var recipes: ArrayList<Recipe> = arrayListOf()
 
     do {
         println(
             """
+                
         Selecciona la opción deseada
     0. Salir
     1. Hacer una receta
@@ -16,15 +20,26 @@ fun main(args: Array<String>){
 
         when (selected) {
             "0" -> println("Gracias por visitarnos")
-            "1" -> makeRecipe()
-            "2" ->  println("Seleccionaste ver mis Recetas")
+            "1" -> {
+                val recipe = Recipe(makeRecipe())
+                recipes.add(recipe)
+            }
+            "2" -> {
+                println("Seleccionaste ver mis Recetas")
+                showRecipes(recipes)
+            }
 
             else -> println("Opcion no valida, vuelve a intentarlo")
         }
     }while (!selected.equals("0"))
 }
 
-fun makeRecipe(){
+fun makeRecipe(): Array<List<String>>{
+
+    var typeGrain = listOf<String>()
+    var typeFruits = listOf<String>()
+    var others = listOf<String>()
+
     do {
         println("""
         Hacer receta
@@ -40,30 +55,52 @@ fun makeRecipe(){
 
         val selected = readLine()
 
-        when (selected) {
-            "1" -> return
-            "2" -> return
-            "3" -> return
-            "4" -> return
+        finish@when (selected) {
+            "0" -> println()
+            "1" -> others += "Agua"
+            "2" -> others += "Leche"
+            "3" -> others += "Carne"
+            "4" -> others += "Verduras"
             "5" -> {
                 val fruits = Fruits()
-                if(!fruits.ingredients().equals("0")) {
-                println("Escogiste la fruta: ${fruits.ingredients()}")
+                if(!fruits.getIngredient().equals("0")) {
+                    typeFruits += fruits.getIngredient()
+                println("Escogiste la fruta: ${fruits.getIngredient()}")
             }
             }
             "6" -> {
                 val grain = Grain()
-                if (!grain.ingredients().equals("0")){
-                    println("Escogiste el cereal: ${grain.ingredients()}")
+                if (!grain.getIngredient().equals("0")){
+                    typeGrain += grain.getIngredient()
+                    println("Escogiste el cereal: ${grain.getIngredient()}")
                 }
             }
-            "7" -> return
-            "8" -> return
+            "7" -> others += "Huevos"
+            "8" -> others += "Aceite"
             else -> println("Opcion no valida, vuelve a intentarlo")
         }
-    }while (true)
+    }while (!selected.equals("0"))
+
+    val ingredients: Array<List<String>> = arrayOf(others,typeFruits,typeGrain)
+    return ingredients
+
 }
 
 fun viewRecipe(){println("""
         Ver mis recetas
-""".trimIndent())}
+""".trimIndent())
+}
+
+fun showRecipes(recipes: ArrayList<Recipe>){
+    if (recipes.size>0) {
+        var count = 0
+        recipes.forEach() {
+            println("         RECETA $count")
+            count++
+            it.showRecipe()
+        }
+    }else{
+        println("\nAun no tienes ninguna receta")
+    }
+}
+
